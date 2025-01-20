@@ -12,7 +12,8 @@
             background-color: #00162c;
             color: #ffffff;
         }
-
+        
+        
         header {
             background-color: #00397560;
             padding: 20px;
@@ -27,9 +28,10 @@
         header h1 {
             font-size: 3.5em;
             color: #f0e130;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 0 10px rgb(148, 161, 29), 0 0 20px rgb(148, 161, 29);
             letter-spacing: 2px;
             margin: 0;
+            
         }
 
         nav {
@@ -90,9 +92,8 @@
         }
 
         .section h3 {
-            font-size: 2.5em;
+            font-size: 3.0em;
             color: #f0e130;
-            border-bottom: 2px solid #f0e130;
             display: inline-block;
             margin-bottom: 20px;
         }
@@ -188,6 +189,38 @@
                 max-width: 190px;
             }
         }
+        
+        .line {
+        border: 0;
+        border-top: 3px solid #f0e130; /* Màu sắc và độ dày của đường line */
+        margin: 10px 0; /* Khoảng cách trên và dưới đường line */
+    }
+
+        /* Kiểu dáng nút mũi tên */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;  /* Khoảng cách từ dưới chân trang */
+    right: 30px;   /* Khoảng cách từ cạnh phải */
+    background-color: #f0e03050;
+    color: #fff;
+    border-radius: 50%;
+    width: 60px;  /* Độ rộng của ô tròn */
+    height: 60px; /* Độ cao của ô tròn */
+    display: none;  /* Ban đầu ẩn nút */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    display: flex;
+    align-items: center;  /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    font-size: 2em;
+}
+
+/* Hiệu ứng hover */
+.scroll-to-top:hover {
+    background-color: #ffcc00a6;
+}
+
     </style>
 </head>
 <body>
@@ -206,10 +239,10 @@
         <h2>Khám Phá Thế Giới Liên Minh Huyền Thoại</h2>
         <p>Tìm hiểu về các tướng, cập nhật tin tức mới nhất và trở thành bậc thầy Đấu Trường Công Lý!</p>
     </div>
-
+    <hr class="line">
     <div class="container">
         <section id="champions" class="section fade-up">
-            <h3>Các Tướng Nổi Bật</h3>
+            <h3 style="text-shadow: 3px 3px 8px rgb(148, 161, 29);">Các Tướng Nổi Bật</h3>
             <div class="card">
                 <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg" alt="Ahri">
                 
@@ -262,7 +295,8 @@
         
 
         <section id="news" class="section fade-up">
-            <h3>Tin Tức Mới Nhất</h3>
+        <hr class="line">
+            <h3 style="text-shadow: 3px 3px 8px rgb(148, 161, 29);">Tin Tức Mới Nhất</h3>
             <div class="news">
               
                 <!-- Chia thành lưới 3 cột mỗi dòng -->
@@ -336,7 +370,8 @@
         </section>
 
             <section id="guides" class="section fade-up">
-                <h3>Hướng Dẫn Chơi Liên Minh Huyền Thoại</h3>
+                <hr class="line">
+                <h3 style="text-shadow: 3px 3px 8px rgb(148, 161, 29);">Hướng Dẫn Chơi Liên Minh Huyền Thoại</h3>
                 
                 <div class="card">
                     <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg" alt="Hướng Dẫn Ahri">
@@ -382,7 +417,10 @@
                         <a href="https://www.leagueoflegends.com/vi-vn/news/tags/champion-spotlight/" target="_blank" style="color:#f0e130">Xem thêm...</a>
                     </div>
                 </div>
-            
+
+
+                
+
             </section>
             
               
@@ -444,7 +482,7 @@
                 }
               
                 .news-text .more:hover {
-                  text-decoration: underline;
+                    text-decoration: underline;
                 }
               </style>
               
@@ -463,8 +501,11 @@
                 <a href="https://instagram.com" target="_blank">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"><strong>Instagram</strong>
                 </a>
-                <a href="https://mail.google.com/mail/u/0/#inbox">
+                <a href="https://mail.google.com/mail" target="_blank">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"><strong>Gmail</strong>
+                </a>
+                <a href="#" class="scroll-to-top" id="scrollToTopBtn">
+                                        ↑ 
                 </a>
             </div>
         </footer>
@@ -474,6 +515,72 @@
 
 
     <script>
+        // Lấy nút di chuyển lên đầu trang
+var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+// Đặt một biến để kiểm soát khi nào cần thay đổi trạng thái của nút
+var isButtonVisible = false;
+
+// Hàm xử lý cuộn trang
+function handleScroll() {
+    var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+    var pageHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    // Kiểm tra nếu cuộn xuống dưới 2/3 trang thì nút sẽ luôn hiển thị
+    if (scrollPosition > pageHeight * 2 / 3) {
+        if (!isButtonVisible) {
+            isButtonVisible = true;  // Đánh dấu nút đã hiện
+            scrollToTopBtn.style.display = "flex";  // Hiển thị nút
+            setTimeout(function() {
+                scrollToTopBtn.style.opacity = 1;  // Hiệu ứng mờ dần
+                scrollToTopBtn.style.transform = "translateY(0)";  // Hiệu ứng di chuyển lên
+            }, 100);  // Delay để tạo hiệu ứng
+        }
+    } else if (scrollPosition <= pageHeight / 3) { // Khi cuộn lên trên 1/3 trang, ẩn nút
+        if (isButtonVisible) {
+            isButtonVisible = false;  // Đánh dấu nút đã ẩn
+            scrollToTopBtn.style.opacity = 0;   // Mờ dần khi cuộn lên
+            scrollToTopBtn.style.transform = "translateY(50px)";  // Đưa nút xuống dưới
+            setTimeout(function() {
+                scrollToTopBtn.style.display = "none";  // Ẩn nút khi cuộn lên
+            }, 400);  // Đợi cho đến khi hiệu ứng mờ hoàn tất
+        }
+    } else {
+        if (!isButtonVisible) {
+            isButtonVisible = true;  // Đánh dấu nút đã hiện
+            scrollToTopBtn.style.display = "flex";  // Hiển thị nút
+            setTimeout(function() {
+                scrollToTopBtn.style.opacity = 1;  // Hiệu ứng mờ dần
+                scrollToTopBtn.style.transform = "translateY(0)";  // Hiệu ứng di chuyển lên
+            }, 100);  // Delay để tạo hiệu ứng
+        }
+    }
+}
+
+// Gọi ngay khi tải trang để kiểm tra vị trí cuộn ban đầu
+window.addEventListener("load", function() {
+    handleScroll();  // Kiểm tra ngay khi trang tải xong
+});
+
+// Sử dụng sự kiện scroll với debounce
+let scrollTimeout;
+window.addEventListener("scroll", function() {
+    // Nếu đang cuộn, đặt timeout để trì hoãn việc xử lý
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(handleScroll, 50); // Đặt thời gian trì hoãn 50ms
+});
+
+// Khi người dùng nhấp vào nút, cuộn trang lên đầu
+scrollToTopBtn.onclick = function(e) {
+    e.preventDefault();  // Ngăn chặn hành động mặc định của thẻ <a>
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"  // Hiệu ứng cuộn mượt
+    });
+};
+
+
+
         // Animation on scroll
         document.addEventListener('scroll', () => {
             const elements = document.querySelectorAll('.fade-up');
